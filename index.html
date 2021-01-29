@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>bank</title>
+</head>
+
+<body>
+    <div id="login-area">
+        <h1 class="text-center">welcome to the bank</h1>
+        <br>
+        <div class="submit-area">
+            <form action="">
+                <h3>login</h3>
+                <input class="form-control" placeholder="email" type="email" name="" id="">
+                <br>
+                <input class="form-control" placeholder="password" type="password" name="" id="">
+            </form>
+            <br>
+            <button id="login" class="btn btn-success">enter</button>
+
+        </div>
+    </div>
+
+
+    <!-- transection area -->
+    <div id="transection-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="status deposit p-3">
+                        <h1>
+                            Deposit
+                        </h1>
+                        <h5>$<span id="currentDeposit">00</span></h5>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="status withdraw p-3">
+                        <h1>
+                            Withdraw
+                        </h1>
+                        <h5>$<span id="currentWithdraw">00</span></h5>
+                    </div>
+                </div>
+                <div class="col-md-4  ">
+                    <div class="status balance p-3">
+                        <h1>
+                            Balance
+                        </h1>
+                        <h5>$<span id="currentBalance">1200</span></h5>
+                    </div>
+                </div>
+            </div>
+            <!-- transection cards -->
+            <div class="transection-cards p-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="submit-area">
+                            <h4>
+                                Deposit
+                            </h4>
+                            <br>
+                            <input id="depositAmount" placeholder="$you want to deposit" class="form-control" type="text">
+                            <br>
+                            <button id="addDeposit" class="btn btn-success">deposit</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="submit-area">
+                            <h4>
+                                Withdraw
+                            </h4>
+                            <br>
+                            <input id="withdrawAmount" placeholder="$you want to withdraw" class="form-control" type="text"><br>
+                            <button id="addWithdraw" class="btn btn-success">withdraw</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // login button
+        const loginBtn = document.getElementById("login");
+        loginBtn.addEventListener("click", function() {
+                const areaLogin = document.getElementById("login-area");
+                areaLogin.style.display = "none";
+                const transectionArea = document.getElementById('transection-area');
+                transectionArea.style.display = "block";
+
+            })
+            // deposit button
+        const addDeposit = document.getElementById('addDeposit');
+        addDeposit.addEventListener("click", function() {
+                const depositNumber = inputNumber("depositAmount");
+
+                upDate("currentDeposit", depositNumber);
+                upDate("currentBalance", depositNumber);
+                document.getElementById('depositAmount').value = "";
+
+
+            })
+            // withdraw part
+        const addWithdraw = document.getElementById("addWithdraw");
+        addWithdraw.addEventListener("click", function() {
+
+            const withdrawBtn = inputNumber("withdrawAmount");
+            upDate("currentWithdraw", withdrawBtn);
+            upDate("currentBalance", -1 * withdrawBtn);
+            document.getElementById("withdrawAmount").value = "";
+
+
+        })
+
+
+        // input value 
+        function inputNumber(id) {
+            const Amount = document.getElementById(id).value;
+            const AmountNumber = parseFloat(Amount);
+            return AmountNumber;
+
+        }
+        //    update section 
+        function upDate(id, depositNumber) {
+            const current = document.getElementById(id).innerText;
+            const currentNum = parseFloat(current);
+            const totalBalance = depositNumber + currentNum;
+            document.getElementById(id).innerText = totalBalance;
+
+        }
+    </script>
+
+</body>
+
+</html>
